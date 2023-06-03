@@ -1,12 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var app = (0, express_1.default)();
-var port = 5000;
-app.get('/', function (request, response) {
-    response.send('Hello world!');
+import { config } from "dotenv";
+import express from "express";
+const app = express();
+config();
+const port = process.env.PORT;
+app.get("/", (req, res) => {
+    res.send("The sedulous hyena ate the antelope!");
 });
-app.listen(port, function () { return console.log("Running on port ".concat(port)); });
+app.get("/info", (req, res) => {
+    res.send("The info");
+});
+app.listen(port, () => {
+    return console.log(`server is listening on http://localhost:${port}`);
+});
