@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import express from "express";
 const app = express();
 config();
-const port = process.env.PORT || 5000;
+const port = 5000;
 app.get("/", (req, res) => {
   res.send("The sedulous hyena ate the antelope!");
 });
