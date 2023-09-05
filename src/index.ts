@@ -4,7 +4,7 @@ import express from "express";
 const app = express();
 config();
 
-const port = 8080;
+const port = 5000;
 
 app.get("/", (req, res) => {
   res.send("The sedulous hyena ate the antelope!");
