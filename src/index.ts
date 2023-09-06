@@ -8,7 +8,7 @@ config();
 
 const port = 80;
 
-app.use("/", express.static(path.resolve("build")));
+app.use("/", express.static(path.resolve("../you-space/dist")));
 
 app.get("/info", (req, res) => {
   res.send("The info");
