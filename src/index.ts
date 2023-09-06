@@ -1,3 +1,5 @@
+import path from "path";
+
 import { config } from "dotenv";
 import express from "express";
 
@@ -6,16 +8,10 @@ config();
 
 const port = 80;
 
-app.get("/", (req, res) => {
-  res.send("The sedulous hyena ate the antelope!");
-});
+app.use("/", express.static(path.resolve("build")));
 
 app.get("/info", (req, res) => {
   res.send("The info");
-});
-
-app.get("/pupsik", (req, res) => {
-  res.send("Эта страница показывает что пупсики рулят))");
 });
 
 app.listen(port, () => {
