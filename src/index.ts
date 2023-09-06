@@ -14,6 +14,10 @@ app.get("/info", (req, res) => {
   res.send("The info");
 });
 
+app.get("/pupsik", (req, res) => {
+  res.send("Эта страница показывает что пупсики рулят))");
+});
+
 app.listen(port, () => {
   return console.log(`server is listening on http://localhost:${port}`);
 });
