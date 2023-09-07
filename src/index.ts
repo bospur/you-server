@@ -31,7 +31,7 @@ connection.connect((err) => {
 const urlencodedParser = express.urlencoded({ extended: false });
 
 app.get("/api/purchase", (req, res) => {
-  connection.query("SELECT * FROM purchase", (err, result) => {
+  connection.query("SELECT * FROM purchase;", (err, result) => {
     res.send(result);
   });
 });
@@ -41,7 +41,7 @@ app.post("/api/purchase", urlencodedParser, function (request, response) {
   if (!body) return response.sendStatus(400);
 
   connection.query(`INSERT INTO purchase(category, amount)
-    VALUES (${body.category}, ${body.amount})`);
+    VALUES (${body.category}, ${body.amount});`);
 
   response.send({
     message: "Запись успешно добавлена",
