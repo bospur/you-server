@@ -1,5 +1,6 @@
 import path from "path";
 import mysql from "mysql2";
+import cors from "cors";
 
 import { config } from "dotenv";
 import express from "express";
@@ -9,6 +10,11 @@ config();
 const { PORT, DB_PORT, DB_USER, DB_PASS, DB_NAME } = process.env;
 
 app.use("/", express.static(path.resolve("../you-space/dist")));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 const connection = mysql.createConnection({
   host: "localhost",
