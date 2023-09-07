@@ -44,6 +44,7 @@ app.post("/api/purchase", urlencodedParser, function (request, response) {
     `INSERT INTO purchase(category, amount)
     VALUES (${body.category}, ${body.amount});`,
     (err, result) => {
+      console.log(err);
       err && response.sendStatus(400);
 
       if (result) {
