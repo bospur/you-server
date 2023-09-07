@@ -15,6 +15,7 @@ app.use(
     origin: "*",
   })
 );
+app.use(express.json());
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -37,13 +38,13 @@ app.get("/api/purchase", (req, res) => {
 });
 
 app.post("/api/purchase", urlencodedParser, function (request, response) {
-  const params: any = request.params;
-  console.log(request);
-  if (!params) return response.sendStatus(400);
+  const body = request.body;
+  console.log(body);
+  if (!body) return response.sendStatus(400);
 
   connection.query(
     `INSERT INTO purchase(category, amount)
-    VALUES (${params.category}, ${params.amount});`,
+    VALUES (${body.category}, ${body.amount});`,
     (err, result) => {
       console.log(err);
       err && response.sendStatus(400);
