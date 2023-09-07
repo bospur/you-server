@@ -24,26 +24,21 @@ const connection = mysql.createConnection({
   database: DB_NAME,
 });
 
+connection.connect((err) => {
+  if (err) return console.log(err);
+});
+
 const urlencodedParser = express.urlencoded({ extended: false });
 
 app.get("/api/purchase", (req, res) => {
-  connection.connect((err) => {
-    if (err) return console.log(err);
-  });
-
   connection.query("SELECT * FROM purchase", (err, result) => {
     res.send(result);
   });
-
-  connection.end();
 });
 
 app.post("/purchase", urlencodedParser, function (request, response) {
   const body = request.body;
   if (!body) return response.sendStatus(400);
-  connection.connect((err) => {
-    if (err) return console.log(err);
-  });
 
   connection.query(`INSERT INTO purchase(category, amount)
     VALUES (${body.category}, ${body.amount})`);
@@ -51,8 +46,6 @@ app.post("/purchase", urlencodedParser, function (request, response) {
   response.send({
     message: "Запись успешно добавлена",
   });
-
-  connection.end();
 });
 
 app.listen(PORT, () => {
