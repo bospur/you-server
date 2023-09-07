@@ -38,7 +38,7 @@ app.get("/api/purchase", (req, res) => {
 
 app.post("/api/purchase", urlencodedParser, function (request, response) {
   const params: any = request.params;
-  console.log(params);
+  console.log(request);
   if (!params) return response.sendStatus(400);
 
   connection.query(
