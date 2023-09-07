@@ -40,12 +40,19 @@ app.post("/api/purchase", urlencodedParser, function (request, response) {
   const body = request.body;
   if (!body) return response.sendStatus(400);
 
-  connection.query(`INSERT INTO purchase(category, amount)
-    VALUES (${body.category}, ${body.amount});`);
+  connection.query(
+    `INSERT INTO purchase(category, amount)
+    VALUES (${body.category}, ${body.amount});`,
+    (err, result) => {
+      err && response.sendStatus(400);
 
-  response.send({
-    message: "Запись успешно добавлена",
-  });
+      if (result) {
+        response.send({
+          message: "Запись успешно добавлена",
+        });
+      }
+    }
+  );
 });
 
 app.listen(PORT, () => {
