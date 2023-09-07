@@ -37,13 +37,13 @@ app.get("/api/purchase", (req, res) => {
 });
 
 app.post("/api/purchase", urlencodedParser, function (request, response) {
-  const body = request.body;
-  console.log(body);
-  if (!body) return response.sendStatus(400);
+  const params: any = request.params;
+  console.log(params);
+  if (!params) return response.sendStatus(400);
 
   connection.query(
     `INSERT INTO purchase(category, amount)
-    VALUES (${body.category}, ${body.amount});`,
+    VALUES (${params.category}, ${params.amount});`,
     (err, result) => {
       console.log(err);
       err && response.sendStatus(400);
