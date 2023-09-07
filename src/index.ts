@@ -36,7 +36,7 @@ app.get("/api/purchase", (req, res) => {
   });
 });
 
-app.post("/purchase", urlencodedParser, function (request, response) {
+app.post("/api/purchase", urlencodedParser, function (request, response) {
   const body = request.body;
   if (!body) return response.sendStatus(400);
 
