@@ -63,7 +63,7 @@ app.delete("/api/purchase/:id", urlencodedParser, (req, res) => {
   if (!id) return res.sendStatus(400);
 
   connection.query(
-    `delete FROM purchase WHERE 'purchase_id=${id}`,
+    `delete FROM purchase WHERE purchase_id=${id}`,
     (err, result) => {
       console.log(err);
       err && response.sendStatus(400);
