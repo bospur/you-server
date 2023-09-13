@@ -3,7 +3,7 @@ import mysql from "mysql2";
 import cors from "cors";
 
 import { config } from "dotenv";
-import express from "express";
+import express, { response } from "express";
 
 const app = express();
 config();
@@ -52,6 +52,25 @@ app.post("/api/purchase", urlencodedParser, function (request, response) {
       if (result) {
         response.send({
           message: "Запись успешно добавлена",
+        });
+      }
+    }
+  );
+});
+
+app.delete("/api/purchase/:id", urlencodedParser, (req, res) => {
+  const id = req.params.id;
+  if (!id) return res.sendStatus(400);
+
+  connection.query(
+    `delete FROM purchase WHERE 'purchase_id=${id}`,
+    (err, result) => {
+      console.log(err);
+      err && response.sendStatus(400);
+
+      if (result) {
+        res.send({
+          message: "Запись удалена",
         });
       }
     }
